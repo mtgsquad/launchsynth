@@ -36,7 +36,7 @@
           document.getElementById('container').innerHTML += "No device detected.";
         } else {
           WebMidi.inputs.forEach((device, index) => {
-            document.getElementById('container').innerHTML += `${index + 1}: ${device.name} <br>`;
+            document.getElementById('container').innerHTML += `<h3>${index + 1}: ${device.name}</h3> <br>`;
           });
         }
         let pianoSynth = Synth.createInstrument("piano");

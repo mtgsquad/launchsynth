@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Anek+Malayalam&family=League+Gothic&display=swap');
+
 html,
 body {
   height: 100%;
@@ -5,6 +7,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Anek Malayalam', sans-serif;
 }
 
 .dropbtn {
@@ -51,4 +54,17 @@ body {
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
   background-color: #3e8e41;
+}
+
+h1 {
+  font-size: 96px;
+  font-family: 'League Gothic', sans-serif;
+}
+
+h2 {
+  font-size: 36px;
+}
+
+h3 {
+  font-size: 24px;
 }
