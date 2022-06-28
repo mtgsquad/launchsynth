@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>LaunchSynth</title>
+    <script src="./modules/audiosynth.js"></script>
+    <script src="./modules/webmidi.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+      input {
+        width: 50%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <center id="container">
+      <h1>LaunchSynth</h1>
+      <br />
+      <h3 id="config"></h3>
+      <br />
+      <h2>Connected Devices:</h2>
+    </center>
+
+    <script type="module">
+      // Enable WebMidi.js and trigger the onEnabled() function when ready
+      WebMidi.enable()
+        .then(onEnabled)
+        .catch((err) => alert(err));
+
+      // Function triggered when WebMidi.js is ready
+      function onEnabled() {
+        if (WebMidi.inputs.length < 1) {
+          document.getElementById('container').innerHTML += "No device detected.";
+        } else {
+          WebMidi.inputs.forEach((device, index) => {
+            document.getElementById('container').innerHTML += `${index + 1}: ${device.name} <br>`;
+          });
+        }
+        let pianoSynth = Synth.createInstrument("piano");
+        const launchpad = WebMidi.inputs[0];
+        const config = document.getElementById('config');
+        // const launchpad = WebMidi.getInputByName("TYPE NAME HERE!")
+
+        launchpad.channels[1].addListener("noteon", (e) => {
+          const seconds = "2";
+          let keyNumber = 16;
+          const section = Math.ceil(keyNumber / 12) + 2;
+
+          pianoSynth.play(e.note.name, section, seconds);
+
+          if(launchpad.name.toLowerCase().includes("mini")) {
+            config.innerText = "Using Profile For: Novation Launchpad Mini";
+            console.log(`Connected to: ${launchpad.name}`);
+          } else if(launchpad.name.toLowerCase().includes("matrix")) {
+            config.innerText = "Using Profile For: 203 Matrix";
+            console.log(`Connected to: ${launchpad.name}`);
+          } else if(launchpad.name.toLowerCase().includes("mk2")) {
+            config.innerText = "Using Profile For: Novation Launchpad MK2";
+            console.log(`Connected to: ${launchpad.name}`);
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
