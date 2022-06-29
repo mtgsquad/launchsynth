@@ -25,6 +25,10 @@
     </center>
 
     <script type="module">
+      const vars = {
+        controllerIndex: null,
+      };
+
       // Enable WebMidi.js and trigger the onEnabled() function when ready
       WebMidi.enable()
         .then(onEnabled)
@@ -37,14 +41,15 @@
         } else {
           WebMidi.inputs.forEach((device, index) => {
             document.getElementById('container').innerHTML += `<h3>${index + 1}: ${device.name}</h3> <br>`;
+            if(device.name.toLowerCase().includes("launchpad")) {
+              vars.controllerIndex = index;
+              Object.freeze(vars);
+            }
           });
         }
         let pianoSynth = Synth.createInstrument("piano");
-        const launchpad = WebMidi.getInputByName("Launchpad");
+        const launchpad = WebMidi.inputs[vars.controllerIndex];
         const config = document.getElementById('config');
-          if(!launchpad.channels) {
-            alert("Error: launchpad.channels is undefined.")
-          }  
 
           await launchpad.channels[1].addListener("noteon", (e) => {
           const seconds = "2";
