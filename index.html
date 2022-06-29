@@ -42,6 +42,9 @@
         let pianoSynth = Synth.createInstrument("piano");
         const launchpad = WebMidi.getInputByName("Launchpad");
         const config = document.getElementById('config');
+          if(!launchpad.channels) {
+            alert("Error: launchpad.channels is undefined.")
+          }  
 
           await launchpad.channels[1].addListener("noteon", (e) => {
           const seconds = "2";
