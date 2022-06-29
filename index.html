@@ -31,7 +31,7 @@
         .catch((err) => alert(err));
 
       // Function triggered when WebMidi.js is ready
-      function onEnabled() {
+      async function onEnabled() {
         if (WebMidi.inputs.length < 1) {
           document.getElementById('container').innerHTML += "No device detected.";
         } else {
@@ -44,7 +44,7 @@
         const config = document.getElementById('config');
         // const launchpad = WebMidi.getInputByName("TYPE NAME HERE!")
 
-        launchpad.channels[1].addListener("noteon", (e) => {
+          await launchpad.channels[1].addListener("noteon", (e) => {
           const seconds = "2";
           let keyNumber = 16;
           const section = Math.ceil(keyNumber / 12) + 2;
