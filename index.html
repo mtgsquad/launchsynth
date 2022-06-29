@@ -51,7 +51,8 @@
         const launchpad = WebMidi.inputs[vars.controllerIndex];
         const config = document.getElementById('config');
 
-          await launchpad.channels[1].addListener("noteon", (e) => {
+          launchpad.channels[1].addListener("noteon", (e) => {
+            
           const seconds = "2";
           let keyNumber = 16;
           const section = Math.ceil(keyNumber / 12) + 2;
