@@ -40,9 +40,8 @@
           });
         }
         let pianoSynth = Synth.createInstrument("piano");
-        const launchpad = WebMidi.inputs[0];
+        const launchpad = WebMidi.getInputByName("Launchpad");
         const config = document.getElementById('config');
-        // const launchpad = WebMidi.getInputByName("TYPE NAME HERE!")
 
           await launchpad.channels[1].addListener("noteon", (e) => {
           const seconds = "2";
