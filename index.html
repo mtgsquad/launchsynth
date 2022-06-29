@@ -59,6 +59,9 @@
           } else if(launchpad.name.toLowerCase().includes("mk2")) {
             config.innerText = "Using Profile For: Novation Launchpad MK2";
             console.log(`Connected to: ${launchpad.name}`);
+          } else if(launchpad.name.toLowerCase().includes("pro")) {
+            config.innerText = "Using Profile For: Novation Launchpad Pro";
+            console.log(`Connected to: ${launchpad.name}`);
           }
         });
       }
